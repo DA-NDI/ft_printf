@@ -6,35 +6,52 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 13:07:57 by avolgin           #+#    #+#             */
-/*   Updated: 2018/01/20 20:40:05 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/02/01 05:06:18 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <stdlib.h>
 
-#define MINPLUS(x) ((x) < 0 ? -(x) : (x))
-
-static void	print_base(int value, int base, char *s, int *i)
+static char	get_char(long n)
 {
-	char	*str;
+	if (n <= 9)
+		return (n + '0');
+	return (n - 10 + 'A');
+}
 
-	str = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	if (value <= -base || base <= value)
-		print_base(value / base, base, s, i);
-	s[(*i)++] = str[MINPLUS(value % base)];
+static void	convert_number(long value, int base, char *str, int ssize)
+{
+	int		i;
+
+	if (value == 0)
+	{
+		str[0] = '0';
+		return ;
+	}
+	i = ssize - 1;
+	while (value > 0)
+	{
+		str[i] = get_char(value % base);
+		value /= base;
+		i--;
+	}
 }
 
 char		*ft_itoa_base(int value, int base)
 {
-	char	*s;
-	int		i;
+	char	*ans;
+	int		stringsize;
+	int		bonus;
+	long	val;
 
-	i = 0;
-	if (base < 2 || base > 36 || !(s = (char*)malloc(sizeof(char))))
-		return (void*)0;
-	if (value < 0)
-		s[i++] = '-';
-	print_base(value, base, s, &i);
-	s[i] = '\0';
-	return (s);
+	stringsize = ft_count_digits(value, base);
+	bonus = value < 0 ? 1 : 0;
+	ans = (char*)malloc(sizeof(char) * (stringsize + bonus + 1));
+	val = value;
+	val = val < 0 ? -val : val;
+	ans[0] = value < 0 ? '-' : '0';
+	convert_number(val, base, ans + bonus, stringsize);
+	ans[stringsize + bonus] = '\0';
+	return (ans);
 }

@@ -6,7 +6,7 @@
 #    By: avolgin <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/09 18:42:23 by avolgin           #+#    #+#              #
-#    Updated: 2018/02/01 03:21:50 by avolgin          ###   ########.fr        #
+#    Updated: 2018/02/01 05:08:28 by avolgin          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -15,6 +15,7 @@ NAME = libftprintf.a
 SRC_LIB =./libft/ft_atoi.c \
 		./libft/ft_bzero.c \
 		./libft/count_bits.c \
+		./libft/ft_count_digits.c \
 		./libft/ft_intlen.c \
 		./libft/ft_is_whitespace.c \
 		./libft/ft_isalnum.c \
@@ -114,16 +115,16 @@ FLAGS = -Wall -Wextra
 all: $(NAME)
 
 $(NAME) : $(OBJECT_LIB) $(OBJECT_PRINTF)
-		ar rc $(NAME) $(OBJECT_LIB) $(OBJECT_PRINTF)
-		ranlib $(NAME)
+		@ar rc $(NAME) $(OBJECT_LIB) $(OBJECT_PRINTF)
+		@ranlib $(NAME)
 %.o: %.c
-		gcc  $(FLAGS) -o $@ -c $<
+		@gcc $(FLAGS) -o $@ -c $<
 clean:
-		/bin/rm -f $(OBJECT_LIB)
-		/bin/rm -f $(OBJECT_PRINTF)
+		@/bin/rm -f $(OBJECT_LIB)
+		@/bin/rm -f $(OBJECT_PRINTF)
 fclean: clean
-		/bin/rm -f ./libft/libft.a
-		/bin/rm -f $(NAME)
+		@/bin/rm -f ./libft/libft.a
+		@/bin/rm -f $(NAME)
 re:		fclean all
 
 tags:

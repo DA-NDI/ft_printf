@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_long_long_u.c                              :+:      :+:    :+:   */
+/*   ft_count_digits.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/05 16:02:03 by avolgin           #+#    #+#             */
-/*   Updated: 2018/02/06 12:11:04 by avolgin          ###   ########.fr       */
+/*   Created: 2018/02/01 05:06:38 by avolgin           #+#    #+#             */
+/*   Updated: 2018/02/01 05:07:02 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
-char		*ft_itoa_long_long_u(unsigned long long int nbr)
+int		ft_count_digits(int value, int base)
 {
-	unsigned long long int	temp;
-	unsigned long long int	len;
-	char					*str;
+	long	temp;
+	int		ans;
 
-	temp = nbr;
-	len = 2;
-	while (temp /= 10)
-		len++;
-	if ((str = (char*)malloc(sizeof(char) * len)) == NULL)
-		return (NULL);
-	str[--len] = '\0';
-	while (len--)
+	temp = value;
+	temp = temp < 0 ? -temp : temp;
+	ans = 0;
+	if (temp == 0)
+		return (1);
+	while (temp != 0)
 	{
-		str[len] = nbr % 10 + '0';
-		nbr = nbr / 10;
+		ans++;
+		temp /= base;
 	}
-	return (str);
+	return (ans);
 }

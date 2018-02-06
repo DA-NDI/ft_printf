@@ -6,7 +6,7 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/26 17:39:56 by avolgin           #+#    #+#             */
-/*   Updated: 2018/02/06 12:03:21 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/02/06 13:41:01 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef	struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+int					ft_count_digits(int value, int base);
 int					get_next_line(const int fd, char **line);
 char				*ft_rot_n(char *str, int n);
 int					ft_pow(int nb, int pow);
